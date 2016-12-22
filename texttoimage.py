@@ -5,7 +5,7 @@ import scipy.cluster
 def removebg(clust):
 	NUM_CLUSTERS = clust
 	print 'reading image'
-	im = Image.open('/TestImages/sign.png')
+	im = Image.open('TestImages/sign.png')
 	w, h = im.size
 	if w*h>500000:
 		w = w/2
