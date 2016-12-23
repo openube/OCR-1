@@ -1,18 +1,16 @@
 from PIL import Image
+from getConnections import getConnections
 import scipy
 import scipy.misc
 import scipy.cluster
+insertPix = []
 def removebg(clust):
+	insertPix = []
 	NUM_CLUSTERS = clust #Define Number of Clusters to be removed
 	print 'reading image' 
-	im = Image.open('Test Images/sign.png') #Open Image Before Pixel Removal
+	im = Image.open('Test Images/sshot.png') #Open Image Before Pixel Removal
 	w, h = im.size #Get Image Width and Height
 	tpix = w*h #Total Pixels
-	if tpix>500000: #Check if the Amount of Pixels is Greater Than 500,000, if so cut image in half
-		w = w/2
-		h = h/2
-		im = im.resize((w,h)) #Resize image
-
 	ar = scipy.misc.fromimage(im) #Return as Numpy Array
 	shape = ar.shape #Get Array Shape
 	ar = ar.reshape(scipy.product(shape[:2]), shape[2]) #Get Product of Array Values
@@ -27,7 +25,7 @@ def removebg(clust):
 	index_max = scipy.argmax(counts)                    # find most frequent
 	peak = codes[index_max] #Get Largest Cluster
 	j = im
-	j.show() #Show Image Before Removal
+	#j.show() Show Image Before Removal
 	j = j.convert("RGBA") #Convert to RGBA Format
 	d = 0 #Height Counter
 	tpix = w*h #Total Pixels
@@ -47,6 +45,7 @@ def removebg(clust):
 				c=c+1
 			else:
 				j.putpixel((c,d),(0,0,0,0)) #Adds Black if Doesn't
+				insertPix.append([c,d])
 				c=c+1
 				p=p+1
 	if clust==1:
@@ -60,15 +59,15 @@ def removebg(clust):
 				c=c+1
 			else:
 				j.putpixel((c,d),(0,0,0,0)) #Add if Not Close
+				insertPix.append([c,d])
 				c=c+1
 				p=p+1
-	print p
-	print tpix
 	if clust==2 and p<(tpix/10) and p<(tpix/1.5): #If Not Enough Pixels Are Placed (Image only 2 colors), Rerun but only remove largest cluster
 		removebg(1)
 	else:
+		getConnections(insertPix)
 		return j
-removebg(2).show();
+removebg(2)
 
 
 
