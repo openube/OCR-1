@@ -1,7 +1,6 @@
 # OCR
-```diff
-+ Requirements:
-```
+
+Requirements:
 - Python
 - Scipy
 - PIL Imaging Library
