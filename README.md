@@ -3,6 +3,7 @@ Requirements:
 - Python
 - Scipy
 - PIL Imaging Library
+
 To Do List:
 - Improve Connected-component labeling algorithm
 - Incorperate Numpy Arrays in getConnections.py to increase speed
