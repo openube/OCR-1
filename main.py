@@ -3,8 +3,7 @@ from fetchConnections import fetchConnections
 
 from removeBackground import removeBackground
 
-removeBackground(2)
-#fetchConnections(removeBackground(2))
+fetchConnections(removeBackground(2))
 
 
 
