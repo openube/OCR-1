@@ -1,6 +1,10 @@
+
 from PIL import Image
+
 import numpy as np
+
 from scipy.spatial.distance import cdist
+
 import sys
 
 sys.setrecursionlimit(100000)
@@ -29,7 +33,7 @@ def finishImage(groupList):
 		for y in range (0, len(newL[x])):
 
 			l.putpixel((newL[x][y][0],newL[x][y][1]),(0,0,0,0))
-
+	l.show()
 	sys.exit(0)
 
 def fetchConnections(Arr):
@@ -60,7 +64,7 @@ def fetchConnections(Arr):
 
 			groups.append(groupList)
 			fetchConnections(extractedArr)
-
+		print len(groupList)
 		out(nextTo)
 
 	out(groupCoords)
